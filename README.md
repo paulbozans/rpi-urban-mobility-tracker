@@ -69,7 +69,7 @@ cd ${UMT_DIR}
 
 4) Download the Dockerfile and build it:
 ```sh
-wget https://raw.githubusercontent.com/nathanrooy/rpi-urban-mobility-tracker/master/Dockerfile
+wget https://raw.githubusercontent.com/paulbozans/rpi-urban-mobility-tracker/master/Dockerfile
 
 docker build . -t umt
 ```
@@ -81,7 +81,7 @@ docker run --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
 
 6) Test install by downloading a video and running the tracker:
 ```sh
-wget https://github.com/nathanrooy/rpi-urban-mobility-tracker/raw/master/data/videos/highway_01.mp4
+wget https://github.com/paulbozans/rpi-urban-mobility-tracker/raw/master/data/videos/highway_01.mp4
 
 umt -video highway_01.mp4
 ```
@@ -96,7 +96,7 @@ pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_ru
 
 Then finish with the following:
 ```sh
-pip install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker
+pip install git+https://github.com/paulbozans/rpi-urban-mobility-tracker
 ```
 
 Lastly, test the install by running step #6 from the Raspberry Pi install instructions above.
