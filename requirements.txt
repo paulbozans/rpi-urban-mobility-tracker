@@ -1,5 +1,4 @@
 deep_sort @ https://github.com/mk-michal/deep_sort/archive/master.zip#egg=deep_sort-1.3.0
-whell
 filterpy
 imutils
 numpy~=1.19.2
