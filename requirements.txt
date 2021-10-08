@@ -1,7 +1,7 @@
 deep_sort @ https://github.com/mk-michal/deep_sort/archive/master.zip#egg=deep_sort-1.2.0
 filterpy
 imutils
-numpy
+numpy~=1.19.2
 pillow
 opencv-python
 scipy
