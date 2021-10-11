@@ -78,7 +78,26 @@ docker build . -t umt
 ```sh
 docker run --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
 ```
-Go to : 
+fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph." if neded
+  
+```sh
+nano /usr/local/lib/python3.7/dist-packages/deep_sort_tools/generate_detections.py
+```
+  Change this two lines form :
+  ```sh
+  self.input_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{net/input_name}:0")
+  self.output_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{net/output_name}:0")
+  ```
+  to this:
+  ```sh
+  self.input_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{input_name}:0")
+  self.output_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{output_name}:0")
+  ```
+  
   
   
 6) Test install by downloading a video and running the tracker:
@@ -114,7 +133,7 @@ Then finish with the following:
 ```sh
 pip install git+https://github.com/paulbozans/rpi-urban-mobility-tracker
 ```
-fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph."
+fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph."  if neded
   
 ```sh
 nano umt/lib/python3.8/site-packages/deep_sort_tools/generate_detections.py
