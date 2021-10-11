@@ -88,7 +88,21 @@ umt -video highway_01.mp4
 If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
 
 ## Install (Ubuntu)
-First, create a new virtualenv, initialize it, then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
+First, create a new virtualenv, 
+  
+```sh
+python3 -m venv umt
+```
+initialize it, 
+```sh
+source umt/bin/activate
+```
+install whell
+```sh
+pip3 install wheel
+```
+   
+then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
 
 ```sh
 pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
@@ -98,7 +112,26 @@ Then finish with the following:
 ```sh
 pip install git+https://github.com/paulbozans/rpi-urban-mobility-tracker
 ```
-
+fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph."
+  
+```sh
+nano umt/lib/python3.8/site-packages/deep_sort_tools/generate_detections.py
+```
+  Change this two lines form :
+  ```sh
+  self.input_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{net/input_name}:0")
+  self.output_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{net/output_name}:0")
+  ```
+  to this:
+  ```sh
+  self.input_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{input_name}:0")
+  self.output_var = tf.compat.v1.get_default_graph().get_tensor_by_name(
+       f"{output_name}:0")
+  ```
+  
 Lastly, test the install by running step #6 from the Raspberry Pi install instructions above.
 
 ## Model Choice
