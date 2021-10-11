@@ -78,7 +78,9 @@ docker build . -t umt
 ```sh
 docker run --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
 ```
-
+Go to : 
+  
+  
 6) Test install by downloading a video and running the tracker:
 ```sh
 wget https://github.com/paulbozans/rpi-urban-mobility-tracker/raw/master/data/videos/highway_01.mp4
