@@ -60,3 +60,9 @@ RUN pip3 install git+https://github.com/mk-michal/deep_sort
 
 # install umt
 RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps
+
+# addons and corrections
+
+RUN apt install nano
+RUN sed -i 's/f"net\//f"/g' /usr/local/lib/python3.7/dist-packages/deep_sort_tools/generate_detections.py
+
