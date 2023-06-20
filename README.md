@@ -78,6 +78,10 @@ docker build . -t umt
 ```sh
 docker run --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
 ```
+or with display
+```sh
+docker run --network=host -e DISPLAY=$DISPLAY --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
+```
 fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph." if neded
   
 ```sh
