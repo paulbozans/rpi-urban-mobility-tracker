@@ -82,6 +82,10 @@ or with display
 ```sh
 docker run --network=host -e DISPLAY=$DISPLAY --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
 ```
+or with display and tpu
+```sh
+docker run --network=host -e DISPLAY=$DISPLAY --rm -it -v /dev/bus/usb:/dev/bus/usb --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
+```
 fix KeyError: "The name 'net/images:0' refers to a Tensor which does not exist. The operation, 'net/images', does not exist in the graph." if neded
   
 ```sh
@@ -162,12 +166,13 @@ Lastly, test the install by running step #6 from the Raspberry Pi install instru
 ## Model Choice
 The default deep learning model is the MobileNet v1 which has been trained on the <a target="_blank" href="http://cocodataset.org">COCO dataset</a> and quantized for faster performance on edge deployments. Another good model choice is <a target="_blank" href="https://github.com/nathanrooy/ped-net">PedNet</a> which is also a quantized MobileNet v1 however, it's been optimized specifically for pedestrians, cyclsts, and vehicles. To use PedNet, simply download it from its repo here: https://github.com/nathanrooy/ped-net or clone it.
 ```sh
-git clone https://github.com/nathanrooy/ped-net
+git clone https://github.com/paulbozans/ped-net
 ```
 Once the model and labels have been downloaded, simply use the `modelpath` and `labelmap` flags to specify a non-default model setup. As an example:
 ```sh
 umt -camera -modelpath pednet_20200326_tflite_graph.tflite -labelmap labels.txt
 ```
+If you got an error 
 
 ## Usage
 Since this code is configured as a cli, everything is accessible via the `umt` command on your terminal. To run while using the Raspberry Pi camera (or laptop camera) data source run the following:
