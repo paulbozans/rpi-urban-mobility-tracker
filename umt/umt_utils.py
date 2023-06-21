@@ -10,6 +10,8 @@ from scipy.spatial.distance import cosine
 import imutils
 from imutils.video import VideoStream
 
+import re
+
 # deep sort
 #from umt.deep_sort import generate_detections as gd
 #from umt.deep_sort.detection import Detection
@@ -266,3 +268,29 @@ def non_max_suppression(boxes, max_bbox_overlap, scores=None):
                 ([last], np.where(overlap > max_bbox_overlap)[0])))
 
     return pick
+
+def compute_gates(args):
+    if args.gate:
+        print('   > GATE = TRUE')
+        
+        src = args.gate
+        gates = []
+        names = re.findall("(?<=\,\')(.*?)(?=\')",,src)
+        coords = re.findall("(?<=\()(.*?)(?=\))", src)
+        coords = list(map(int, src.split(',')))
+        
+        if len(coords) == len(names)*4:
+            for i in range(0, len(coords), 4):
+                gate = [(coords[i], coords[i+1]), (coords[i+2], coords[i+3]), names[[i/4]]
+                gates.append(gate)
+                print(f'   > GATE:{names[i/4]} [{gate}]')
+        
+    else:
+        print('   > GATE = FALSE')
+        
+    return gates
+
+def compute_detection_centroid(xmin, ymin, xmax, ymax):
+    c_x = xmin + (0.5 * ymin)
+    c_y = xmax + (0.5 * ymax)
+    return c_x, c_y

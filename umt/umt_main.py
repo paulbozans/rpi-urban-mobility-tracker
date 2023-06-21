@@ -43,6 +43,7 @@ def main():
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='live_view', required=False, default=False, action='store_true', help='add this flag to view a live display. note, that this will greatly slow down the fps rate.')
     parser.add_argument('-save', dest='save_frames', required=False, default=False, action='store_true', help='add this flag if you want to persist the image output. note, that this will greatly slow down the fps rate.')
+    parser.add_argument('-gate', dest='gate', type=str, default=False, required=False, help='specify custom gates and it\'s coord')
     args = parser.parse_args()
     
     # basic checks
@@ -53,6 +54,9 @@ def main():
 
     print('> INITIALIZING UMT...')
     print('   > THRESHOLD:',args.threshold)
+    
+    # parse gates
+    gates = compute_gates(args)
 
 	# parse label map
     labels = parse_label_map(args, DEFAULT_LABEL_MAP_PATH)
@@ -110,6 +114,7 @@ def main():
                             f'{int(bbox[0])},{int(bbox[1])},'
                             f'{int(bbox[2])},{int(bbox[3])}')
                         print(row, file=out_file)
+                        det_centroid = compute_detection_centroid(int(bbox[0]),int(bbox[1]),int(bbox[2]),int(bbox[3]))
                 
             # only for live display
             if args.live_view or args.save_frames:
