@@ -67,7 +67,7 @@ RUN apt-get install -y git
 RUN pip3 install git+https://github.com/mk-michal/deep_sort
 
 # install umt
-RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps
+RUN pip3 install git+https://github.com/paulbozans/rpi-urban-mobility-tracker --no-deps
 
 # addons and corrections
 
